@@ -39,6 +39,14 @@ public class OrderDetailsController {
         return new ResponseEntity<OrderDetails>(od, HttpStatus.OK);
     }
 
+    // To update the data in db based on order id
+    @PutMapping("OrderDetail/{id}")
+    public ResponseEntity<OrderDetails> updateorder(@PathVariable("id") int id, @RequestBody OrderDetails orderdetails){
+
+        OrderDetails od = orderdetailservice.updateorderdetails(id, orderdetails);
+        return new ResponseEntity<OrderDetails>(od, HttpStatus.OK);
+    }
+
     //Delete the particular row based on order id from table
     @DeleteMapping("OrderDetail/{id}")
     public ResponseEntity<String> deleteorder(@PathVariable("id") int id){

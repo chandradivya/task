@@ -59,11 +59,34 @@ public class OrderDetailsService {
         OrderDetails od = getLastInsertedBook();
         return od;
     }
+
+    /**
+     * This method is responsible to update book detail in database
+     */
+    public OrderDetails updateorderdetails(int orderid, OrderDetails orderdetails) {
+
+        //First We are taking order detail from database by given order id and
+        // then updating detail with provided orderodetails object
+        OrderDetails orderdetailsfromDB = getOrder(orderid);
+        //orderdetailsfromDB.setOrder_id(orderdetails.getOrder_id());
+        orderdetailsfromDB.setOrderdesc(orderdetails.getOrderdesc());
+        orderdetailsfromDB.setCustname(orderdetails.getCustname());
+        orderdetailsfromDB.setOrderstatus(orderdetails.getOrderstatus());
+        orderdetailsfromDB.setProduct_type(orderdetails.getProduct_type());
+
+
+        entityManager.flush();
+
+        //again i am taking updated result of book and returning the book object
+        OrderDetails updateorderdetails = getOrder(orderid);
+
+        return updateorderdetails;
+    }
+
     /**
      * This method is responsible for deleting a particular(which id will be passed that record)
      * record from the database
      */
-
     public boolean deleteorderdetails(int orderid) {
         OrderDetails od = getOrder(orderid);
         entityManager.remove(od);
