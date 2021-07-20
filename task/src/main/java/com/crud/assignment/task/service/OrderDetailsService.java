@@ -43,8 +43,8 @@ public class OrderDetailsService {
      * This method will get the latest inserted record from the database and return the object of order details class
      * @return order
      */
-    private OrderDetails getLastInsertedBook(){
-        String hql = "from OrderDetails order by id ASC";
+    private OrderDetails getLastInsertedorder(){
+        String hql = "from OrderDetails order by id DESC";
         Query query = entityManager.createQuery(hql);
         query.setMaxResults(1);
         OrderDetails recentorder = (OrderDetails)query.getSingleResult();
@@ -56,7 +56,7 @@ public class OrderDetailsService {
      */
     public OrderDetails creatorderdetail(OrderDetails orderdetails) {
         entityManager.persist(orderdetails);
-        OrderDetails od = getLastInsertedBook();
+        OrderDetails od = getLastInsertedorder();
         return od;
     }
 
